@@ -1,12 +1,39 @@
-import React from 'react'
+import { SEO } from "@/components/SEO";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { Metrics } from "@/components/Metrics";
+import { About } from "@/components/About";
+import { Services } from "@/components/Services";
+import { Projects } from "@/components/Projects";
+import { Ecosystem } from "@/components/Ecosystem";
+import { Marquee } from "@/components/Marquee";
+import { Pricing } from "@/components/Pricing";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background flex items-center justify-center">
-      <div className="text-center space-y-4">
-        <h1 className="text-4xl font-bold text-foreground">Hello World</h1>
-        <p className="text-lg text-muted-foreground">This is going to be your softgen app, start by describing your project.</p>
+    <>
+      <SEO
+        title="LVN Agency — Consultant Digital & Développeur Web"
+        description="Transformation digitale pour commerces et entreprises. Sites web, applications SaaS, menus digitaux propulsés par l'IA."
+        image="/og-image.png"
+      />
+      <div className="grain-overlay">
+        <Navbar />
+        <main>
+          <Hero />
+          <Metrics />
+          <About />
+          <Services />
+          <Projects />
+          <Ecosystem />
+          <Marquee />
+          <Pricing />
+          <Contact />
+        </main>
+        <Footer />
       </div>
-    </main>
-  )
+    </>
+  );
 }

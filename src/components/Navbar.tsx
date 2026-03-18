@@ -55,8 +55,8 @@ export function Navbar() {
     }, [language, setLanguage]);
 
     const navLinks = [
-        { href: "#projects", label: t("nav.projects"), id: "projects" },
         { href: "#services", label: t("nav.services"), id: "services" },
+        { href: "#projects", label: t("nav.projects"), id: "projects" },
         { href: "#pricing", label: t("nav.pricing"), id: "pricing" },
         { href: "#contact", label: t("nav.contact"), id: "contact" },
     ];

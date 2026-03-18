@@ -102,32 +102,27 @@ export function Navbar() {
                                         onMouseLeave={() => setHoveredLink(null)}
                                         className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200"
                                     >
-                                        {/* Fond lumineux actif (scroll) */}
+                                        {/* Glow hover souris — lumière blanche diffuse, pas de bordure */}
                                         <motion.span
-                                            className="absolute inset-0 rounded-full"
+                                            className="absolute -inset-2 rounded-full pointer-events-none"
                                             animate={{
-                                                backgroundColor: isActive
-                                                    ? "rgba(79,142,247,0.12)"
-                                                    : "rgba(79,142,247,0)",
-                                                boxShadow: isActive
-                                                    ? "0 0 16px rgba(79,142,247,0.2), inset 0 0 12px rgba(79,142,247,0.05)"
-                                                    : "0 0 0px rgba(79,142,247,0)",
-                                                borderColor: isActive
-                                                    ? "rgba(79,142,247,0.3)"
-                                                    : "rgba(79,142,247,0)",
+                                                opacity: isHovered ? 1 : 0,
+                                                boxShadow: isHovered
+                                                    ? "0 0 20px 6px rgba(255,255,255,0.08)"
+                                                    : "0 0 0px 0px rgba(255,255,255,0)",
                                             }}
-                                            style={{ border: "1px solid transparent" }}
-                                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                                            transition={{ duration: 0.25, ease: "easeInOut" }}
                                         />
-                                        {/* Fond lumineux hover (souris) */}
+                                        {/* Glow actif scroll — lumière blanche diffuse */}
                                         <motion.span
-                                            className="absolute inset-0 rounded-full"
+                                            className="absolute -inset-2 rounded-full pointer-events-none"
                                             animate={{
-                                                backgroundColor: isHovered && !isActive
-                                                    ? "rgba(255,255,255,0.05)"
-                                                    : "rgba(255,255,255,0)",
+                                                opacity: isActive ? 1 : 0,
+                                                boxShadow: isActive
+                                                    ? "0 0 22px 8px rgba(255,255,255,0.07)"
+                                                    : "0 0 0px 0px rgba(255,255,255,0)",
                                             }}
-                                            transition={{ duration: 0.2, ease: "easeInOut" }}
+                                            transition={{ duration: 0.4, ease: "easeInOut" }}
                                         />
                                         {/* Texte */}
                                         <span className={`relative z-10 transition-colors duration-300 ${isActive

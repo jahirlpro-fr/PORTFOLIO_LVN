@@ -94,16 +94,16 @@ export function Navbar() {
                             </span>
                         </Link>
 
-                        {/* ── DESKTOP NAV LINKS ── */}
-                        <div className="hidden md:flex items-center gap-1">
-                            {navLinks.map((link) => {
-                                const isActive = activeSection === link.id;
-                                return (
-
-                                    key = { link.href }
-                href = { link.href }
-                                className = "relative px-4 py-2 text-sm font-medium rounded-xl transition-all duration-300 group"
-                                    >
+{/* ── DESKTOP NAV LINKS ── */}
+<div className="hidden md:flex items-center gap-1">
+    {navLinks.map((link) => {
+        const isActive = activeSection === link.id;
+        return (
+            
+                key={link.href}
+                href={link.href}
+                className="relative px-4 py-2 text-sm font-medium rounded-xl transition-all duration-300 group"
+            >
                 <motion.span
                     className="absolute inset-0 rounded-xl"
                     style={{ border: "1px solid" }}
@@ -123,9 +123,9 @@ export function Navbar() {
                     {link.label}
                 </span>
             </a>
-                        );
+        );
     })}
-                    </div>
+</div>
 
                         {/* ── DESKTOP RIGHT ACTIONS ── */}
                         <div className="hidden md:flex items-center gap-3">

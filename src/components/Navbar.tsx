@@ -104,28 +104,25 @@ export function Navbar() {
                 href = { link.href }
                                 className = "relative px-4 py-2 text-sm font-medium rounded-xl transition-all duration-300 group"
                                     >
-                                    {/* Fond lumineux actif au scroll — s'allume/s'éteint en fondu */ }
-                                    < motion.span
-                                className = "absolute inset-0 rounded-xl"
-                                style = {{ border: "1px solid" }
-                            }
-                    animate = {{
-                                backgroundColor: isActive ? "rgba(79,142,247,0.12)" : "rgba(79,142,247,0)",
-                                borderColor: isActive ? "rgba(79,142,247,0.25)" : "rgba(79,142,247,0)",
-                                boxShadow: isActive ? "0 0 16px rgba(79,142,247,0.15)" : "0 0 0px rgba(79,142,247,0)",
-                            }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                <motion.span
+                    className="absolute inset-0 rounded-xl"
+                    style={{ border: "1px solid" }}
+                    animate={{
+                        backgroundColor: isActive ? "rgba(79,142,247,0.12)" : "rgba(79,142,247,0)",
+                        borderColor: isActive ? "rgba(79,142,247,0.25)" : "rgba(79,142,247,0)",
+                        boxShadow: isActive ? "0 0 16px rgba(79,142,247,0.15)" : "0 0 0px rgba(79,142,247,0)",
+                    }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
                 />
-                            {/* Fond hover souris */}
-                            <span className="absolute inset-0 rounded-xl bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
-                            {/* Texte */}
-                            <span className={`relative z-10 transition-colors duration-300 ${isActive
-                                    ? "text-accent"
-                                    : "text-text-secondary group-hover:text-text-primary"
-                                }`}>
-                                {link.label}
-                            </span>
-                        </a>
+                <span className="absolute inset-0 rounded-xl bg-white/0 group-hover:bg-white/5 transition-colors duration-200" />
+                <span className={`relative z-10 transition-colors duration-300 ${
+                    isActive
+                        ? "text-accent"
+                        : "text-text-secondary group-hover:text-text-primary"
+                }`}>
+                    {link.label}
+                </span>
+            </a>
                         );
     })}
                     </div>

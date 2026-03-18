@@ -73,4 +73,23 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* ── AJOUTER dans src/styles/globals.css ──
+   Dans le bloc @layer utilities { ... }, après .text-balance */
+
+  .animate-gradient-x {
+      animation: gradient-x 4s ease infinite;
+  }
+
+  @keyframes gradient-x {
+
+      0%,
+      100% {
+          background-position: 0% 50%;
+      }
+
+      50% {
+          background-position: 100% 50%;
+      }
+  }
 }

@@ -99,37 +99,49 @@ export function Navbar() {
                             {navLinks.map((link) => {
                                 const isActive = activeSection === link.id;
                                 return (
-                                    <a
-                                        key={link.href}
-                                        href={link.href}
-                                        className="relative px-4 py-2 text-sm font-medium transition-colors duration-200 group"
-                                    >
-                                        {/* Active / hover background pill */}
-                                        <span
-                                            className={`absolute inset-0 rounded-full transition-all duration-300 ${isActive
-                                                ? "bg-accent/10"
-                                                : "bg-transparent group-hover:bg-surface"
-                                                }`}
-                                        />
-                                        {/* Text */}
-                                        <span
-                                            className={`relative transition-colors duration-200 ${isActive ? "text-accent" : "text-text-secondary group-hover:text-text-primary"
-                                                }`}
-                                        >
-                                            {link.label}
-                                        </span>
-                                        {/* Active dot indicator */}
-                                        {isActive && (
-                                            <motion.span
-                                                layoutId="nav-active-dot"
-                                                className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-accent rounded-full"
-                                            />
-                                        )}
-                                    </a>
-                                );
-                            })}
-                        </div>
 
+                                    key = { link.href }
+                href = { link.href }
+                                className = "relative px-4 py-2 text-sm font-medium rounded-xl transition-colors duration-200 group"
+                                    >
+                                    {/* Fond actif au scroll — bleu lumineux avec glow */ }
+                                    < motion.span
+                                className = "absolute inset-0 rounded-full"
+                                style = {{ border: "1px solid transparent" }
+                            }
+                    animate = {{
+                                backgroundColor: isActive
+                                    ? "rgba(79,142,247,0.12)"
+                                    : "rgba(79,142,247,0)",
+                                borderColor: isActive
+                                    ? "rgba(79,142,247,0.25)"
+                                    : "rgba(79,142,247,0)",
+                                boxShadow: isActive
+                                    ? "0 0 14px rgba(79,142,247,0.18)"
+                                    : "0 0 0px rgba(79,142,247,0)",
+                            }}
+                            transition={{ duration: 0.35, ease: "easeInOut" }}
+                />
+                            {/* Fond hover souris — s'allume au survol */}
+                            <motion.span
+                                className="absolute inset-0 rounded-full"
+                                animate={{}}
+                                whileHover={{
+                                    backgroundColor: "rgba(255,255,255,0.05)",
+                                }}
+                                transition={{ duration: 0.2 }}
+                            />
+                            {/* Texte */}
+                            <span className={`relative z-10 transition-colors duration-300 ${isActive
+                                    ? "text-accent"
+                                    : "text-text-secondary group-hover:text-text-primary"
+                                }`}>
+                                {link.label}
+                            </span>
+                        </a>
+                        );
+    })}
+                    </div>
                         {/* ── DESKTOP RIGHT ACTIONS ── */}
                         <div className="hidden md:flex items-center gap-3">
                             {/* Language toggle */}

@@ -100,7 +100,7 @@ export function Navbar() {
                                         href={link.href}
                                         onMouseEnter={() => setHoveredLink(link.id)}
                                         onMouseLeave={() => setHoveredLink(null)}
-                                        className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200"
+                                        className="relative px-4 py-2 text-sm font-medium transition-colors duration-200"
                                     >
                                         {/* Lampe torche hover — lumière blanche chaude depuis le centre */}
                                         <motion.span
@@ -108,7 +108,7 @@ export function Navbar() {
                                             animate={{
                                                 opacity: isHovered ? 1 : 0,
                                                 background: isHovered
-                                                    ? "radial-gradient(ellipse 80% 120% at 50% 50%, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.06) 40%, transparent 75%)"
+                                                    ? "radial-gradient(ellipse 80% 120% at 50% 50%, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.06) 40%, transparent 75%)"
                                                     : "radial-gradient(ellipse 80% 120% at 50% 50%, rgba(255,255,255,0) 0%, transparent 75%)",
                                             }}
                                             transition={{ duration: 0.25, ease: "easeInOut" }}
@@ -119,7 +119,7 @@ export function Navbar() {
                                             animate={{
                                                 opacity: isActive ? 1 : 0,
                                                 background: isActive
-                                                    ? "radial-gradient(ellipse 80% 120% at 50% 50%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, transparent 75%)"
+                                                    ? "radial-gradient(ellipse 80% 120% at 50% 50%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0.05) 40%, transparent 75%)"
                                                     : "radial-gradient(ellipse 80% 120% at 50% 50%, rgba(255,255,255,0) 0%, transparent 75%)",
                                             }}
                                             transition={{ duration: 0.35, ease: "easeInOut" }}

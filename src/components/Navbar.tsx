@@ -11,23 +11,20 @@ export function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("");
+    const [hoveredLink, setHoveredLink] = useState < string | null > (null);
 
-    // Scroll progress bar at top
     const { scrollYProgress } = useScroll();
     const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
-    // Detect scroll for navbar background
     useEffect(() => {
         const handleScroll = () => setIsScrolled(window.scrollY > 30);
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    // Active section detection via IntersectionObserver
     useEffect(() => {
-        const sectionIds = ["projects", "services", "pricing", "contact"];
+        const sectionIds = ["services", "projects", "pricing", "contact"];
         const observers: IntersectionObserver[] = [];
-
         sectionIds.forEach((id) => {
             const el = document.getElementById(id);
             if (!el) return;
@@ -40,11 +37,9 @@ export function Navbar() {
             observer.observe(el);
             observers.push(observer);
         });
-
         return () => observers.forEach((o) => o.disconnect());
     }, []);
 
-    // Lock body scroll when mobile menu open
     useEffect(() => {
         document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
         return () => { document.body.style.overflow = ""; };
@@ -75,8 +70,8 @@ export function Navbar() {
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-                    ? "bg-bg/85 backdrop-blur-2xl border-b border-border shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
-                    : "bg-transparent"
+                        ? "bg-bg/85 backdrop-blur-2xl border-b border-border shadow-[0_4px_30px_rgba(0,0,0,0.4)]"
+                        : "bg-transparent"
                     }`}
             >
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -98,50 +93,56 @@ export function Navbar() {
                         <div className="hidden md:flex items-center gap-1">
                             {navLinks.map((link) => {
                                 const isActive = activeSection === link.id;
+                                const isHovered = hoveredLink === link.id;
                                 return (
-                                
-                                    key = { link.href }
-                href = { link.href }
-                                className = "relative px-4 py-2 text-sm font-medium rounded-xl transition-colors duration-200 group"
+                                    <a
+                                        key={link.href}
+                                        href={link.href}
+                                        onMouseEnter={() => setHoveredLink(link.id)}
+                                        onMouseLeave={() => setHoveredLink(null)}
+                                        className="relative px-4 py-2 text-sm font-medium rounded-full transition-colors duration-200"
                                     >
-                                    {/* Fond actif au scroll — bleu lumineux avec glow */ }
-                                    < motion.span
-                                className = "absolute inset-0 rounded-full"
-                                style = {{ border: "1px solid transparent" }
-                            }
-                    animate = {{
-                                backgroundColor: isActive
-                                    ? "rgba(79,142,247,0.12)"
-                                    : "rgba(79,142,247,0)",
-                                borderColor: isActive
-                                    ? "rgba(79,142,247,0.25)"
-                                    : "rgba(79,142,247,0)",
-                                boxShadow: isActive
-                                    ? "0 0 14px rgba(79,142,247,0.18)"
-                                    : "0 0 0px rgba(79,142,247,0)",
-                            }}
-                            transition={{ duration: 0.35, ease: "easeInOut" }}
-                />
-                            {/* Fond hover souris — s'allume au survol */}
-                            <motion.span
-                                className="absolute inset-0 rounded-full"
-                                animate={{}}
-                                whileHover={{
-                                    backgroundColor: "rgba(255,255,255,0.05)",
-                                }}
-                                transition={{ duration: 0.2 }}
-                            />
-                            {/* Texte */}
-                            <span className={`relative z-10 transition-colors duration-300 ${isActive
-                                    ? "text-accent"
-                                    : "text-text-secondary group-hover:text-text-primary"
-                                }`}>
-                                {link.label}
-                            </span>
-                        </a>
-                        );
-    })}
-                    </div>
+                                        {/* Fond lumineux actif (scroll) */}
+                                        <motion.span
+                                            className="absolute inset-0 rounded-full"
+                                            animate={{
+                                                backgroundColor: isActive
+                                                    ? "rgba(79,142,247,0.12)"
+                                                    : "rgba(79,142,247,0)",
+                                                boxShadow: isActive
+                                                    ? "0 0 16px rgba(79,142,247,0.2), inset 0 0 12px rgba(79,142,247,0.05)"
+                                                    : "0 0 0px rgba(79,142,247,0)",
+                                                borderColor: isActive
+                                                    ? "rgba(79,142,247,0.3)"
+                                                    : "rgba(79,142,247,0)",
+                                            }}
+                                            style={{ border: "1px solid transparent" }}
+                                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                                        />
+                                        {/* Fond lumineux hover (souris) */}
+                                        <motion.span
+                                            className="absolute inset-0 rounded-full"
+                                            animate={{
+                                                backgroundColor: isHovered && !isActive
+                                                    ? "rgba(255,255,255,0.05)"
+                                                    : "rgba(255,255,255,0)",
+                                            }}
+                                            transition={{ duration: 0.2, ease: "easeInOut" }}
+                                        />
+                                        {/* Texte */}
+                                        <span className={`relative z-10 transition-colors duration-300 ${isActive
+                                                ? "text-accent"
+                                                : isHovered
+                                                    ? "text-text-primary"
+                                                    : "text-text-secondary"
+                                            }`}>
+                                            {link.label}
+                                        </span>
+                                    </a>
+                                );
+                            })}
+                        </div>
+
                         {/* ── DESKTOP RIGHT ACTIONS ── */}
                         <div className="hidden md:flex items-center gap-3">
                             {/* Language toggle */}
@@ -155,15 +156,15 @@ export function Navbar() {
                                 <span className={language === "en" ? "text-text-primary" : "text-text-muted"}>EN</span>
                             </button>
 
-                            {/* CTA button */}
+                            {/* CTA */}
                             <a
                                 href="#contact"
                                 className="group relative inline-flex items-center gap-2 bg-accent text-white
-                           px-5 py-2.5 rounded-full text-sm font-semibold
-                           hover:bg-accent/90 transition-all duration-300
-                           shadow-[0_0_20px_rgba(79,142,247,0.25)]
-                           hover:shadow-[0_0_35px_rgba(79,142,247,0.45)]
-                           hover:scale-105"
+                                           px-5 py-2.5 rounded-full text-sm font-semibold
+                                           hover:bg-accent/90 transition-all duration-300
+                                           shadow-[0_0_20px_rgba(79,142,247,0.25)]
+                                           hover:shadow-[0_0_35px_rgba(79,142,247,0.45)]
+                                           hover:scale-105"
                             >
                                 {t("nav.cta")}
                                 <ArrowUpRight

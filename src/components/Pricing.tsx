@@ -99,9 +99,9 @@ export function Pricing() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.12, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                            className={`relative bg-surface border rounded-2xl p-8 transition-all duration-400 ${plan.accent} ${plan.popular
-                                    ? "shadow-[0_0_60px_rgba(79,142,247,0.12)] scale-[1.02]"
-                                    : "hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]"
+                            className={`relative bg-surface border rounded-2xl transition-all duration-400 ${plan.accent} ${plan.popular
+                                    ? "p-8 pt-12 shadow-[0_0_60px_rgba(79,142,247,0.12)] scale-[1.02]"
+                                    : "p-8 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)]"
                                 }`}
                         >
                             {/* Popular glow background */}
@@ -111,7 +111,7 @@ export function Pricing() {
 
                             {/* Badge populaire */}
                             {plan.badge && (
-                                <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-accent text-white px-4 py-1.5 rounded-full text-xs font-semibold shadow-[0_0_20px_rgba(79,142,247,0.5)]">
+                                <div className="absolute -top-5 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-accent text-white px-4 py-1.5 rounded-full text-xs font-semibold shadow-[0_0_20px_rgba(79,142,247,0.5)] whitespace-nowrap">
                                     <Sparkles size={12} />
                                     {plan.badge}
                                 </div>

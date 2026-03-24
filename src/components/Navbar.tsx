@@ -3,11 +3,13 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, Sun, Moon } from "lucide-react";
+import { useTheme } from "@/contexts/ThemeContext";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 
 export function Navbar() {
     const { language, setLanguage, t } = useLanguage();
+    const { theme, toggleTheme } = useTheme();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("");
@@ -140,6 +142,15 @@ export function Navbar() {
 
                         {/* ── DESKTOP RIGHT ACTIONS ── */}
                         <div className="hidden md:flex items-center gap-3">
+                            {/* Theme toggle */}
+                            <button
+                                onClick={toggleTheme}
+                                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-text-muted hover:text-text-primary hover:border-accent/40 transition-all duration-300"
+                                aria-label="Toggle theme"
+                            >
+                                {theme === "light" ? <Moon size={15} /> : <Sun size={15} />}
+                            </button>
+
                             {/* Language toggle */}
                             <button
                                 onClick={toggleLanguage}

@@ -5,8 +5,10 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <LanguageProvider>
-      <Component {...pageProps} />
-    </LanguageProvider>
+      <ThemeProvider>
+          <LanguageProvider>
+              <Component {...pageProps} />
+          </LanguageProvider>
+      </ThemeProvider>
   );
 }
